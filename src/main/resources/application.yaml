@@ -13,8 +13,10 @@ spring:
 
   profiles:
     active: ${spring.profile.active}
+
   init:
     mode: never
+
   jpa:
     show-sql: true
     open-in-view: false
