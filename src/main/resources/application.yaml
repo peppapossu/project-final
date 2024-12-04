@@ -7,6 +7,7 @@ app:
     core-pool-size: 8
     max-pool-size: 100
 
+
 spring:
   config:
     import: optional:file:./src/main/resources/values.yaml
@@ -14,8 +15,9 @@ spring:
   profiles:
     active: ${spring.profile.active}
 
-  init:
-    mode: never
+  sql:
+    init:
+      mode: never
 
   jpa:
     show-sql: true
@@ -82,9 +84,7 @@ spring:
             user-info-uri: https://gitlab.com/api/v4/user
             user-name-attribute: email
 
-  sql:
-    init:
-      mode: always
+
 
   mail:
     properties:
