@@ -9,7 +9,7 @@ app:
 
 spring:
   profiles:
-    active: ${SPRING_PROFILES_ACTIVE:prod}
+    active: ${spring.profile.active:prod}
   init:
     mode: never
   jpa:
