@@ -14,8 +14,11 @@ spring:
 
   profiles:
     active: ${spring.profile.active}
-  init:
-    mode: never
+
+  sql:
+    init:
+      mode: never
+
   jpa:
     show-sql: true
     open-in-view: false
@@ -80,10 +83,6 @@ spring:
             token-uri: https://gitlab.com/oauth/token
             user-info-uri: https://gitlab.com/api/v4/user
             user-name-attribute: email
-
-  sql:
-    init:
-      mode: always
 
   mail:
     properties:
