@@ -8,25 +8,25 @@ from PROFILE;
 
 delete
 from ACTIVITY;
-alter
-sequence ACTIVITY_ID_SEQ restart with 1;
+CREATE SEQUENCE IF NOT EXISTS ACTIVITY_ID_SEQ START WITH 1 INCREMENT BY 1;
+ALTER SEQUENCE ACTIVITY_ID_SEQ RESTART WITH 1;
 delete
 from TASK;
-alter
-sequence TASK_ID_SEQ restart with 1;
+CREATE SEQUENCE IF NOT EXISTS TASK_ID_SEQ START WITH 1 INCREMENT BY 1;
+ALTER SEQUENCE TASK_ID_SEQ RESTART WITH 1;
 delete
 from SPRINT;
-alter
-sequence SPRINT_ID_SEQ restart with 1;
+CREATE SEQUENCE IF NOT EXISTS SPRINT_ID_SEQ START WITH 1 INCREMENT BY 1;
+ALTER SEQUENCE SPRINT_ID_SEQ RESTART WITH 1;
 delete
 from PROJECT;
-alter
-sequence PROJECT_ID_SEQ restart with 1;
+CREATE SEQUENCE IF NOT EXISTS PROJECT_ID_SEQ START WITH 1 INCREMENT BY 1;
+ALTER SEQUENCE PROJECT_ID_SEQ RESTART WITH 1;
 
 delete
 from USERS;
-alter
-sequence USERS_ID_SEQ restart with 1;
+CREATE SEQUENCE IF NOT EXISTS USERS_ID_SEQ START WITH 1 INCREMENT BY 1;
+ALTER SEQUENCE USERS_ID_SEQ RESTART WITH 1;
 
 insert into USERS (EMAIL, PASSWORD, FIRST_NAME, LAST_NAME, DISPLAY_NAME)
 values ('user@gmail.com', '{noop}password', 'userFirstName', 'userLastName', 'userDisplayName'),
@@ -48,7 +48,7 @@ insert into PROFILE (ID, LAST_FAILED_LOGIN, LAST_LOGIN, MAIL_NOTIFICATIONS)
 values (1, null, null, 49),
        (2, null, null, 14);
 
-insert into CONTACT (ID, CODE, VALUE)
+insert into CONTACT (ID, CODE, CONTACT_VALUE)
 values (1, 'skype', 'userSkype'),
        (1, 'mobile', '+01234567890'),
        (1, 'website', 'user.com'),
