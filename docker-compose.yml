@@ -1,0 +1,38 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .  # Контекст для сборки Dockerfile
+    image: jira:latest
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_PROFILES_ACTIVE=prod
+    volumes:
+      - ./src/main/resources/values.yaml:/app/values.yaml  # Если нужно монтировать значения
+    depends_on:
+      - db
+
+  db:
+    image: postgres:13
+    environment:
+      - POSTGRES_USER=jira
+      - POSTGRES_PASSWORD=JiraRush
+      - POSTGRES_DB=jira
+    volumes:
+      - db-data:/var/lib/postgresql/data
+    ports:
+      - "5432:5432"
+
+  nginx:
+    image: nginx:latest
+    volumes:
+      - ./config/nginx.conf:/etc/nginx/conf.d/default.conf  # Монтируем конфиг NGINX
+    ports:
+      - "80:80"  # Пробрасываем порт 80 на хост
+    depends_on:
+      - app  # NGINX должен запускаться после приложения
+
+volumes:
+  db-data:
