@@ -10,10 +10,14 @@ app:
 
 spring:
   config:
-    import: optional:file:./src/main/resources/values.yaml
+    import:
+    - "optional:file:./src/main/resources/values.yaml"
+    - "optional:file:/app/config/values.yaml"
+    - "optional:file:./app/config/values.yaml"
+
 
   profiles:
-    active: ${spring.profile.active}
+    active: ${spring.profile.active:prod}
 
   sql:
     init:
@@ -36,8 +40,8 @@ spring:
         jdbc.batch_size: 20
   datasource:
     url: jdbc:postgresql://localhost:5432/jira
-    username: ${db.username}
-    password: ${db.password}
+    username: ${db.username:jira}
+    password: ${db.password:JiraRush}
 
   liquibase:
     changeLog: "classpath:db/changelog.sql"

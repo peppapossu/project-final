@@ -27,4 +27,9 @@
 - https://habr.com/ru/articles/259055/
 
 Список выполненных задач:
-...
+Task 1. Done
+Task 2. Done (Removed vk an yandex code)
+Task 3. Done (Secret data transferred to values.yaml)
+Task 4. Done (Rebuild test DB from PostgreSQL to H2)
+Task 5.
+Task 6. Done (Refactoring from IO to NIO)
