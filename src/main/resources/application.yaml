@@ -10,10 +10,7 @@ app:
 
 spring:
   config:
-    import:
-    - "optional:file:./src/main/resources/values.yaml"
-    - "optional:file:/app/config/values.yaml"
-    - "optional:file:./app/config/values.yaml"
+    import: optional:classpath:values.yaml
 
 
   profiles:

@@ -10,7 +10,7 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
     volumes:
-      - ./src/main/resources/values.yaml:/app/config/values.yaml  # Если нужно монтировать значения
+      - ./src/main/resources/values.yaml:/app/values.yaml  # Если нужно монтировать значения
     depends_on:
       - db
 
