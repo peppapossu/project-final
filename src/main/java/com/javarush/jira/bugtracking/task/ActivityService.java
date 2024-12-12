@@ -8,6 +8,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.Duration;
+import java.time.LocalDateTime;
+import java.util.Comparator;
 import java.util.List;
 
 import static com.javarush.jira.bugtracking.task.TaskUtil.getLatestValue;
@@ -72,5 +75,53 @@ public class ActivityService {
                 task.setTypeCode(latestType);
             }
         }
+    }
+
+    private Duration calculateTaskInProgressDuration(Task task) {
+        if (task.getActivities().isEmpty()) return Duration.ofSeconds(0);
+
+        LocalDateTime startTime = task
+                .getActivities()
+                .stream()
+                .filter(t -> "in_progress".equals(t.getStatusCode()))
+                .findFirst()
+                .map(Activity::getUpdated)
+                .orElse(null);
+
+        LocalDateTime endTime = task
+                .getActivities()
+                .stream()
+                .filter(t -> "ready_for_review".equals(t.getStatusCode()))
+                .map(Activity::getUpdated)
+                .max(Comparator.naturalOrder())
+                .orElse(null);
+
+        if (endTime != null && startTime != null) {
+            return Duration.between(startTime, endTime);
+        } else return Duration.ofSeconds(0);
+    }
+
+    private Duration calculateTaskInTestDuration(Task task) {
+        if (task.getActivities().isEmpty()) return Duration.ofSeconds(0);
+
+        LocalDateTime endTime = task
+                .getActivities()
+                .stream()
+                .filter(t -> "done".equals(t.getStatusCode()))
+                .findFirst()
+                .map(Activity::getUpdated)
+                .orElse(null);
+
+        LocalDateTime startTime = task
+                .getActivities()
+                .stream()
+                .filter(t -> "in_progress".equals(t.getStatusCode()))
+                .map(Activity::getUpdated)
+                .max(Comparator.naturalOrder())
+                .orElse(null);
+
+        if (endTime != null && startTime != null) {
+            return Duration.between(startTime, endTime);
+        } else return Duration.ofSeconds(0);
     }
 }
