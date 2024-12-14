@@ -8,9 +8,12 @@ services:
     ports:
       - "8080:8080"
     environment:
-      - SPRING_PROFILES_ACTIVE=prod
-    volumes:
-      - ./src/main/resources/values.yaml:/app/values.yaml  # Если нужно монтировать значения
+      #      - SPRING_PROFILES_ACTIVE=prod
+      SPRING_DATASOURCE_URL: jdbc:postgresql://db:5432/jira
+      SPRING_DATASOURCE_USERNAME: jira
+      SPRING_DATASOURCE_PASSWORD: JiraRush
+    #    volumes:
+    #      - ./src/main/resources/values.yaml:/app/values.yaml  # Если нужно монтировать значения
     depends_on:
       - db
 
